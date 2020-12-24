@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RickAndMortyGo</string>
+    <string name="collection">Collection</string>
+    <string name="characters">Personnages</string>
+    <string name="episodes">Episodes</string>
+    <string name="locations">Lieux</string>
+</resources>
