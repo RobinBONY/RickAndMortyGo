@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortygo.R
-import com.example.rickandmortygo.repository.RetrofitController
+import com.example.rickandmortygo.repository.RepositoryController
 import kotlinx.android.synthetic.main.fragment_locations.*
 
 class LocationsFragment : Fragment() {
@@ -34,11 +34,11 @@ class LocationsFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    RetrofitController.fetchNextLocationsPage()
+                    RepositoryController.fetchNextLocationsPage()
                 }
             }
         })
-        RetrofitController.error.observe(this, Observer {
+        RepositoryController.error.observe(this, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
@@ -47,11 +47,11 @@ class LocationsFragment : Fragment() {
 
     private fun fetchLocations() {
 
-        RetrofitController.locationsList.observe(this, Observer {
+        RepositoryController.locationsList.observe(this, Observer {
                 locations ->
             adapter?.setData(locations)
         })
 
-        RetrofitController.fetchAllLocations()
+        RepositoryController.fetchAllLocations()
     }
 }

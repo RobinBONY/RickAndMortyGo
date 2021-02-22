@@ -1,12 +1,16 @@
 package com.example.rickandmortygo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.rickandmortygo.presentation.characters.CharactersFragment
 import com.example.rickandmortygo.presentation.collection.CollectionFragment
 import com.example.rickandmortygo.presentation.episodes.EpisodesFragment
 import com.example.rickandmortygo.presentation.locations.LocationsFragment
+import com.example.rickandmortygo.repository.RepositoryController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -72,5 +76,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK && data?.data != null) {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        RepositoryController.fetchCharacter(result.contents, this)
     }
 }

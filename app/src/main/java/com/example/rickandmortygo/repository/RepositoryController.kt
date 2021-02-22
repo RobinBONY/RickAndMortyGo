@@ -1,7 +1,9 @@
 package com.example.rickandmortygo.repository
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.example.rickandmortygo.api.ApiManager
+import com.example.rickandmortygo.data.database.CharacterDatabase
 import com.example.rickandmortygo.data.model.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -9,10 +11,12 @@ import retrofit2.Response
 import timber.log.Timber
 
 
-object RetrofitController {
+object RepositoryController {
 // DATASource
 
     val error = MutableLiveData<String>()
+
+    val collectionList = MutableLiveData<List<Character>>()
 
     val charactersList = MutableLiveData<List<Character>>()
     val nextCharactersPage = MutableLiveData<Info>()
@@ -28,7 +32,6 @@ object RetrofitController {
         val call = ApiManager.rickEtMortyApi.fetchCharacters()
         fetchCharacters(call)
     }
-
 
     fun fetchNextCharactersPage() {
         if(nextCharactersPage.value?.next != null) {
@@ -147,5 +150,48 @@ object RetrofitController {
                 locationsList.postValue(emptyList())
             }
         })
+    }
+
+    /* COLLECTION */
+    fun fetchCharacter(link: String,context: Context) {
+
+        val regex = "[0-9]+".toRegex()
+        var page = regex.find(link)
+        if (page != null) {
+            val call = ApiManager.rickEtMortyApi.fetchCharacter(page.groups[0]?.value!!)
+            fetchCharacter(call, context)
+        }
+    }
+
+    private fun fetchCharacter(call: Call<CharactersResult>,context: Context) {
+        call.enqueue(object : Callback<CharactersResult> {
+            override fun onResponse(
+                call: Call<CharactersResult>,
+                response: Response<CharactersResult>
+            ) {
+                if (response.isSuccessful) {
+                    val db = CharacterDatabase.getDatabase(context)
+                    val dao = db.characterDao()
+                    dao.addCharacter(response.body()?.results?.get(0)!!)
+                    fetchCollection(context)
+                }
+            }
+
+            override fun onFailure(call: Call<CharactersResult>, t: Throwable) {
+                Timber.e("fetchCharacters onFailure, ${t.localizedMessage}")
+                Timber.e("fetchCharacters onFailure, $t")
+
+                error.postValue("onFailure 404")
+
+                charactersList.postValue(emptyList())
+            }
+        })
+    }
+
+    fun fetchCollection(context: Context){
+        val db = CharacterDatabase.getDatabase(context)
+        val dao = db.characterDao()
+        val character = dao.getCollection()
+        collectionList.postValue(character)
     }
 }

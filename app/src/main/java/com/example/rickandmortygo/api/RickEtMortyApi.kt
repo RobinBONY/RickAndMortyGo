@@ -12,6 +12,9 @@ interface RickEtMortyApi {
     @GET("character")
     fun fetchCharacters(): Call<CharactersResult>
 
+    @GET("character/{id}")
+    fun fetchCharacter(@Path("id") id: String): Call<CharactersResult>
+
     @GET("character")
     fun fetchNextCharacters(@Query("page") page: Int): Call<CharactersResult>
 
