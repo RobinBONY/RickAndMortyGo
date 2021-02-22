@@ -3,7 +3,6 @@ package com.example.rickandmortygo.repository
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.example.rickandmortygo.api.ApiManager
-import com.example.rickandmortygo.data.database.CharacterDatabase
 import com.example.rickandmortygo.data.model.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -163,21 +162,19 @@ object RepositoryController {
         }
     }
 
-    private fun fetchCharacter(call: Call<CharactersResult>,context: Context) {
-        call.enqueue(object : Callback<CharactersResult> {
+    private fun fetchCharacter(call: Call<Character>,context: Context) {
+        call.enqueue(object : Callback<Character> {
             override fun onResponse(
-                call: Call<CharactersResult>,
-                response: Response<CharactersResult>
+                call: Call<Character>,
+                response: Response<Character>
             ) {
                 if (response.isSuccessful) {
-                    val db = CharacterDatabase.getDatabase(context)
-                    val dao = db.characterDao()
-                    dao.addCharacter(response.body()?.results?.get(0)!!)
-                    fetchCollection(context)
+                    val list = listOf(response.body())
+                    collectionList.postValue(list as List<Character>?)
                 }
             }
 
-            override fun onFailure(call: Call<CharactersResult>, t: Throwable) {
+            override fun onFailure(call: Call<Character>, t: Throwable) {
                 Timber.e("fetchCharacters onFailure, ${t.localizedMessage}")
                 Timber.e("fetchCharacters onFailure, $t")
 
@@ -186,12 +183,5 @@ object RepositoryController {
                 charactersList.postValue(emptyList())
             }
         })
-    }
-
-    fun fetchCollection(context: Context){
-        val db = CharacterDatabase.getDatabase(context)
-        val dao = db.characterDao()
-        val character = dao.getCollection()
-        collectionList.postValue(character)
     }
 }

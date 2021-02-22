@@ -1,5 +1,6 @@
 package com.example.rickandmortygo.api
 
+import com.example.rickandmortygo.data.model.Character
 import com.example.rickandmortygo.data.model.CharactersResult
 import com.example.rickandmortygo.data.model.EpisodesResult
 import com.example.rickandmortygo.data.model.LocationsResult
@@ -13,7 +14,7 @@ interface RickEtMortyApi {
     fun fetchCharacters(): Call<CharactersResult>
 
     @GET("character/{id}")
-    fun fetchCharacter(@Path("id") id: String): Call<CharactersResult>
+    fun fetchCharacter(@Path("id") id: String): Call<Character>
 
     @GET("character")
     fun fetchNextCharacters(@Query("page") page: Int): Call<CharactersResult>

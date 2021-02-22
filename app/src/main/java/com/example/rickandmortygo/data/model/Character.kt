@@ -6,9 +6,7 @@ import androidx.room.TypeConverter
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity(tableName = "character")
 data class Character(
-    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val created: String,
     val episode: List<String>,

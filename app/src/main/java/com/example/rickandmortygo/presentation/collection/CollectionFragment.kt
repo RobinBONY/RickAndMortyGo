@@ -63,8 +63,6 @@ class CollectionFragment : Fragment() {
                 characters ->
             adapter?.setData(characters)
         })
-
-        RepositoryController.fetchCollection(context!!)
     }
 
     fun scanQRCode(){
