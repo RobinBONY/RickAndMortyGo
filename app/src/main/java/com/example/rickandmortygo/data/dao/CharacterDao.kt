@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.rickandmortygo.data.model.Character
+import com.example.rickandmortygo.data.Character
 
 @Dao
 interface CharacterDao {
@@ -14,4 +14,7 @@ interface CharacterDao {
 
     @Query("SELECT * FROM character ORDER BY id ASC")
     fun getCollection(): List<Character>
+
+    @Query("DELETE FROM character")
+    fun raz()
 }

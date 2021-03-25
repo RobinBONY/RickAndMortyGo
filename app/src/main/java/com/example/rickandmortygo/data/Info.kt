@@ -1,4 +1,4 @@
-package com.example.rickandmortygo.data.model
+package com.example.rickandmortygo.data
 
 import kotlinx.serialization.Serializable
 import java.lang.reflect.Constructor

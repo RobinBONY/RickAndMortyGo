@@ -1,8 +1,7 @@
-package com.example.rickandmortygo.data.model
+package com.example.rickandmortygo.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,3 +21,4 @@ data class Character(
     val type: String,
     val url: String
 )
+

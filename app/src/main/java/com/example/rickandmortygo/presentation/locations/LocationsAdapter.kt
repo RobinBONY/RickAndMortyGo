@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortygo.R
-import com.example.rickandmortygo.data.model.Location
+import com.example.rickandmortygo.data.Location
 import kotlinx.android.synthetic.main.adapter_episode.view.*
 
 class LocationsAdapter :

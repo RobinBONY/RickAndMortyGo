@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortygo.R
-import com.example.rickandmortygo.data.model.Character
+import com.example.rickandmortygo.data.Character
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.adapter_character.view.*
 
@@ -48,5 +48,6 @@ class CharactersAdapter :
 
     fun resetData(){
         this.charactersList.clear()
+        notifyDataSetChanged()
     }
 }

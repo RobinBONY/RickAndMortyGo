@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortygo.R
-import com.example.rickandmortygo.data.model.Episode
+import com.example.rickandmortygo.data.Episode
 import kotlinx.android.synthetic.main.adapter_episode.view.*
 
 class EpisodesAdapter :

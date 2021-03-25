@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortygo.R
-import com.example.rickandmortygo.repository.RepositoryController
 import kotlinx.android.synthetic.main.fragment_episodes.*
 
 class EpisodesFragment : Fragment() {
 
+    private lateinit var episodesViewModel: EpisodesViewModel
     lateinit var adapter: EpisodesAdapter
 
     override fun onCreateView(
@@ -27,18 +28,26 @@ class EpisodesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        episodesViewModel = ViewModelProviders.of(activity!!).get(EpisodesViewModel::class.java)
+        episodesViewModel.clear()
+
         rv_episodes_list.layoutManager = GridLayoutManager(activity,1)
+
         adapter = EpisodesAdapter()
         rv_episodes_list.adapter = adapter
+
         rv_episodes_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    RepositoryController.fetchNextEpisodesPage()
+                    episodesViewModel.fetchNextEpisodesPage()
                 }
             }
         })
-        RepositoryController.error.observe(this, Observer {
+
+        episodesViewModel.observeError(this)
+        episodesViewModel.error.observe(this, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
@@ -47,11 +56,12 @@ class EpisodesFragment : Fragment() {
 
     private fun fetchEpisodes() {
 
-        RepositoryController.episodesList.observe(this, Observer {
+        episodesViewModel.observeEpisodes(this)
+        episodesViewModel.episodesList.observe(this, Observer {
                 episodes ->
             adapter?.setData(episodes)
         })
 
-        RepositoryController.fetchAllEpisodes()
+        episodesViewModel.fetchAllEpisodes()
     }
 }

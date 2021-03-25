@@ -28,15 +28,4 @@
         app:elevation="8dp"
         app:maxImageSize="50dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/raz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="65dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_delete"
-        app:elevation="8dp"
-        app:maxImageSize="50dp" />
 </FrameLayout>

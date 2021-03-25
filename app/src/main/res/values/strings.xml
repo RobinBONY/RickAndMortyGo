@@ -4,4 +4,6 @@
     <string name="characters">Personnages</string>
     <string name="episodes">Episodes</string>
     <string name="locations">Lieux</string>
+    <string name="connexion">Connexion</string>
+    <string name="deconnexion">Déconnexion</string>
 </resources>

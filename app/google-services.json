@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "452362186875",
+    "firebase_url": "https://rickmortygo-17006.firebaseio.com",
+    "project_id": "rickmortygo-17006",
+    "storage_bucket": "rickmortygo-17006.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452362186875:android:3cdc21b13ac321faedb2de",
+        "android_client_info": {
+          "package_name": "com.example.rickandmortygo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452362186875-10roqso5r7buiokkss16rboa776fn4fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhWZabYIT_ALCvPgnfopKGV_b6tLNX19s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452362186875-10roqso5r7buiokkss16rboa776fn4fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452362186875:android:c14c691b4d3a9fd6edb2de",
+        "android_client_info": {
+          "package_name": "com.example.rickmortygo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452362186875-10roqso5r7buiokkss16rboa776fn4fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhWZabYIT_ALCvPgnfopKGV_b6tLNX19s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452362186875-10roqso5r7buiokkss16rboa776fn4fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

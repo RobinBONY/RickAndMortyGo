@@ -1,10 +1,11 @@
-package com.example.rickandmortygo.data.database
+package com.example.rickandmortygo.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.rickandmortygo.data.converters.RequestConverter
 import com.example.rickandmortygo.data.dao.CharacterDao
 
 @Database(entities = [Character::class], version = 1, exportSchema = false)
@@ -17,7 +18,7 @@ abstract class CharacterDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: CharacterDatabase? = null
 
-        fun getDatabase(context: Context):CharacterDatabase{
+        fun getDatabase(context: Context): CharacterDatabase {
             val tempInstance = INSTANCE
             if(tempInstance != null){
                 return tempInstance
