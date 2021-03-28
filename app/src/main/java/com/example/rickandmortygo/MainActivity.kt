@@ -147,15 +147,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE_SCAN) {
-            if (resultCode == RESULT_OK && data?.data != null) {
-                super.onActivityResult(requestCode, resultCode, data)
-            }
-            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-            if (result != null) {
-                collection.fetchScannedCharacter(result, this)
-            }
-        }
         if (requestCode == GGL_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -167,6 +158,15 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
                 updateUI()
+            }
+        }
+        else {
+            if (resultCode == RESULT_OK && data?.data != null) {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                collection.fetchScannedCharacter(result, this)
             }
         }
     }

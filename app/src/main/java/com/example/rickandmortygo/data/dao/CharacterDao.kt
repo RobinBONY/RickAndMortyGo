@@ -9,7 +9,7 @@ import com.example.rickandmortygo.data.Character
 @Dao
 interface CharacterDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCharacter(character: Character)
 
     @Query("SELECT * FROM character ORDER BY id ASC")
